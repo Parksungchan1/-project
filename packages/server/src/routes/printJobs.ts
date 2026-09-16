@@ -2,9 +2,10 @@ import { Router } from "express";
 import type { CreatePrintJobRequest, CreatePrintJobResponse, DequeuePrintJobResponse } from "@festival-nfc/shared";
 import { getArtist } from "../services/artistStore";
 import { getSession, setSelectedArtist } from "../services/sessionStore";
-import { dequeueNextJob, enqueueJob, getJob, listRecentJobs, markJobCompleted, markJobFailed, queuePosition } from "../services/printQueue";
+import { dequeueNextJob, enqueueJob, getJob, listRecentJobs, markJobCompleted, markJobFailed, queuePosition, retryJob } from "../services/printQueue";
 import { getResultImageBase64 } from "../services/resultImageStore";
 import { requireAdminToken } from "../middleware/requireAdminToken";
+import { getAdminHeartbeat, recordAdminHeartbeat } from "../services/adminHeartbeat";
 
 export const printJobsRouter = Router();
 
@@ -38,6 +39,7 @@ printJobsRouter.post("/print-jobs", (req, res) => {
 
 // --- Admin-only: the booth laptop polls/acts on these ---
 printJobsRouter.post("/print-jobs/dequeue", requireAdminToken, (_req, res) => {
+  recordAdminHeartbeat(); // admin-client's automatic loop hits this every poll cycle
   const job = dequeueNextJob();
   const response: DequeuePrintJobResponse = { job };
   res.json(response);
@@ -70,7 +72,20 @@ printJobsRouter.get("/print-jobs", requireAdminToken, (_req, res) => {
     imageBase64: undefined, // too big for a log list; strip it out
     artistName: getArtist(job.artistId)?.name ?? job.artistId,
   }));
-  res.json(jobs);
+  res.json({ jobs, adminClientLastSeen: getAdminHeartbeat() });
+});
+
+// Failed job (Bluetooth drop, printer offline, etc.) -> put it back in the
+// queue so admin-client's normal automatic loop picks it up again. This is
+// the one action the admin page is allowed to trigger -- it doesn't print
+// anything itself, it just re-enters the same automatic pipeline.
+printJobsRouter.post("/print-jobs/:id/retry", requireAdminToken, (req, res) => {
+  const job = retryJob(req.params.id);
+  if (!job) {
+    res.status(404).json({ error: "job not found or not in failed state" });
+    return;
+  }
+  res.json(job);
 });
 
 printJobsRouter.get("/print-jobs/:id", (req, res) => {

@@ -47,6 +47,28 @@ npm run dev:admin
 | GET | /api/artists | 카드용 9명 목록 |
 | GET | /api/artists/:id | 상세 + 유사 아티스트 |
 | POST | /api/print-jobs | 출력 요청 (해당 아티스트의 사전 준비된 결과 이미지를 큐에 적재) |
-| POST | /api/print-jobs/dequeue | (관리자) 다음 작업 꺼내기 |
+| POST | /api/print-jobs/dequeue | (관리자, admin-client 전용) 다음 작업 꺼내기 — 호출될 때마다 heartbeat 기록됨 |
 | POST | /api/print-jobs/:id/complete | (관리자) 완료 처리 |
 | POST | /api/print-jobs/:id/fail | (관리자) 실패 처리 |
+| POST | /api/print-jobs/:id/retry | (관리자) 실패한 작업을 큐에 다시 넣음 (admin.html의 "다시 시도" 버튼) |
+| GET | /api/print-jobs | (관리자) 최근 작업 목록 + admin-client 마지막 접속 시각 (admin.html이 폴링) |
+
+## 테스트/모니터링 페이지
+
+- `/test.html` — 사용자앱 신호 시뮬레이터 (실제 UI 아님, NFC 태그 테스트용)
+- `/admin.html?token=<ADMIN_TOKEN>` — 관리자 모니터. 이 URL을 부스 랩탑 브라우저에 북마크해두면 토큰을 다시 입력할 필요 없음. 1.5초마다 자동 새로고침:
+  - 프린터 연결 프로그램(admin-client) 생존 여부를 색으로 표시 (5초 이상 응답 없으면 빨간색 경고)
+  - 최근 요청/상태 로그
+  - 실패한 작업에 "다시 시도" 버튼 — 누르면 admin-client의 정상 자동 루프로 다시 들어감 (관리자가 직접 출력을 트리거하는 게 아님)
+
+## 프린터 연결하면 바로 동작하나?
+
+**신호 배관(서버 ↔ 관리자 자동 폴링 ↔ 완료 처리)은 검증 완료.** 실제 T02로 테스트하면 이 부분은 그대로 동작할 것으로 예상.
+
+**단, 프린터 프로토콜 바이트는 미검증**입니다 (`printerProtocol.ts`, `bluetoothPrinter.ts`) — vivier/phomemo-tools 문서 기준 추정치이고, 실기기로 테스트한 적이 없습니다. 실제로 연결했을 때:
+1. Windows Bluetooth 설정에서 T02를 페어링하고 배정된 COM 포트 확인 (`PRINTER_COM_PORT`에 설정)
+2. `.env`에서 `DRY_RUN=false`로 변경
+3. 출력 시도 — 아무것도 안 나오거나 깨진 패턴이 나올 수 있음. 이 경우 명령 바이트(초기화/정렬/래스터 헤더)를 실기기 응답 보면서 같이 맞춰야 함
+4. T02가 Classic Bluetooth(SPP)가 아니라 BLE라면 `bluetoothPrinter.ts`(COM 포트 기반) 자체를 Web Bluetooth나 Android BLE API 기반으로 다시 짜야 함 — 페어링 시 COM 포트가 배정되는지 여부로 판별 가능
+
+즉 "신호가 오가고 관리자가 인지하는 부분"은 되지만, "실제로 종이에 정확히 인쇄되는 것"은 프린터 받으신 후 같이 디버깅이 필요합니다.

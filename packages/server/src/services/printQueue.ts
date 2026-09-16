@@ -66,3 +66,13 @@ export function listRecentJobs(limit = 50): PrintJob[] {
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
     .slice(0, limit);
 }
+
+/** Re-queues a failed job so admin-client's automatic loop picks it up again. */
+export function retryJob(jobId: string): PrintJob | undefined {
+  const job = jobs.get(jobId);
+  if (!job || job.status !== "failed") return undefined;
+  job.status = "pending";
+  job.updatedAt = new Date().toISOString();
+  pendingOrder.push(job.id);
+  return job;
+}
