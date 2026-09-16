@@ -2,15 +2,16 @@ import { Router } from "express";
 import type { CreatePrintJobRequest, CreatePrintJobResponse, DequeuePrintJobResponse } from "@festival-nfc/shared";
 import { getArtist } from "../services/artistStore";
 import { getSession, setSelectedArtist } from "../services/sessionStore";
-import { dequeueNextJob, enqueueJob, getJob, listRecentJobs, markJobCompleted, markJobFailed, queuePosition, retryJob } from "../services/printQueue";
+import { dequeueNextJob, enqueueJob, getJob, getJobBySession, listRecentJobs, markJobCompleted, markJobFailed, queuePosition, retryJob } from "../services/printQueue";
 import { getResultImageBase64 } from "../services/resultImageStore";
 import { requireAdminToken } from "../middleware/requireAdminToken";
+import { writeEndpointLimiter } from "../middleware/rateLimit";
 import { getAdminHeartbeat, recordAdminHeartbeat } from "../services/adminHeartbeat";
 
 export const printJobsRouter = Router();
 
 // --- User-facing: create a print job from the phone webapp ---
-printJobsRouter.post("/print-jobs", (req, res) => {
+printJobsRouter.post("/print-jobs", writeEndpointLimiter, (req, res) => {
   const { sessionId, artistId } = req.body as CreatePrintJobRequest;
 
   const session = getSession(sessionId);
@@ -21,6 +22,17 @@ printJobsRouter.post("/print-jobs", (req, res) => {
   const artist = getArtist(artistId);
   if (!artist) {
     res.status(404).json({ error: "artist not found" });
+    return;
+  }
+
+  // One tap == one session == one print. Repeated calls (double/triple-click,
+  // a retried fetch, or someone hitting the endpoint directly) return the
+  // same job instead of enqueueing duplicates -- this holds even if a caller
+  // bypasses the UI's own debounce entirely.
+  const existing = getJobBySession(sessionId);
+  if (existing) {
+    const response: CreatePrintJobResponse = { jobId: existing.id, queuePosition: queuePosition(existing.id) };
+    res.status(200).json(response);
     return;
   }
 

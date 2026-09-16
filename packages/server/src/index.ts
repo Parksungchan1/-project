@@ -9,6 +9,10 @@ import { initResultImageCache } from "./services/resultImageStore";
 initResultImageCache();
 
 const app = express();
+// Cloud hosts (Railway/Render/etc.) sit behind a reverse proxy -- without
+// this, express-rate-limit sees the proxy's IP for every request instead of
+// the real client's, making the per-IP limiter useless.
+app.set("trust proxy", 1);
 
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));

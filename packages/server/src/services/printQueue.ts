@@ -7,6 +7,11 @@ import type { PrintJob } from "@festival-nfc/shared";
 // JSON file on every mutation instead of swapping to a database.
 const jobs = new Map<string, PrintJob>();
 const pendingOrder: string[] = [];
+// One NFC tap == one session == one print, by design. This index lets us
+// make job creation idempotent per session instead of relying solely on
+// client-side debouncing (a script hitting the API directly bypasses any
+// UI-level double-click guard).
+const jobBySession = new Map<string, string>();
 
 export function enqueueJob(sessionId: string, artistId: string, imageBase64: string): PrintJob {
   const now = new Date().toISOString();
@@ -21,7 +26,13 @@ export function enqueueJob(sessionId: string, artistId: string, imageBase64: str
   };
   jobs.set(job.id, job);
   pendingOrder.push(job.id);
+  jobBySession.set(sessionId, job.id);
   return job;
+}
+
+export function getJobBySession(sessionId: string): PrintJob | undefined {
+  const jobId = jobBySession.get(sessionId);
+  return jobId ? jobs.get(jobId) : undefined;
 }
 
 export function queuePosition(jobId: string): number {

@@ -12,7 +12,8 @@
     "@festival-nfc/shared": "*",
     "@napi-rs/canvas": "^0.1.53",
     "cors": "^2.8.5",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "express-rate-limit": "^8.7.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
