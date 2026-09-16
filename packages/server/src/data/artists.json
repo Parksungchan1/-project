@@ -1,23 +1,101 @@
 [
   {
     "id": "artist-01",
-    "name": "샘플 아티스트 1",
+    "name": "무드라이트",
     "imageUrl": "/media/artists/artist-01.jpg",
     "audioPreviewUrl": "/media/audio/artist-01.mp3",
     "similarArtists": [
-      { "id": "sim-01-a", "name": "유사 아티스트 A", "imageUrl": "/media/similar/sim-01-a.jpg", "reason": "비슷한 장르" },
-      { "id": "sim-01-b", "name": "유사 아티스트 B", "imageUrl": "/media/similar/sim-01-b.jpg", "reason": "비슷한 무드" },
-      { "id": "sim-01-c", "name": "유사 아티스트 C", "imageUrl": "/media/similar/sim-01-c.jpg", "reason": "비슷한 보컬 톤" }
+      { "id": "sim-01-a", "name": "잔물결", "imageUrl": "/media/similar/sim-01-a.jpg", "reason": "비슷한 장르 (드림팝)" },
+      { "id": "sim-01-b", "name": "소프트포커스", "imageUrl": "/media/similar/sim-01-b.jpg", "reason": "비슷한 무드" },
+      { "id": "sim-01-c", "name": "창가의 밤", "imageUrl": "/media/similar/sim-01-c.jpg", "reason": "비슷한 보컬 톤" }
     ]
   },
   {
     "id": "artist-02",
-    "name": "샘플 아티스트 2",
+    "name": "블랙사운드 시스템",
     "imageUrl": "/media/artists/artist-02.jpg",
     "audioPreviewUrl": "/media/audio/artist-02.mp3",
     "similarArtists": [
-      { "id": "sim-02-a", "name": "유사 아티스트 D", "imageUrl": "/media/similar/sim-02-a.jpg", "reason": "비슷한 장르" },
-      { "id": "sim-02-b", "name": "유사 아티스트 E", "imageUrl": "/media/similar/sim-02-b.jpg", "reason": "비슷한 무드" }
+      { "id": "sim-02-a", "name": "파장", "imageUrl": "/media/similar/sim-02-a.jpg", "reason": "비슷한 장르 (일렉트로닉)" },
+      { "id": "sim-02-b", "name": "그리드나이트", "imageUrl": "/media/similar/sim-02-b.jpg", "reason": "비슷한 비트감" },
+      { "id": "sim-02-c", "name": "서브베이스", "imageUrl": "/media/similar/sim-02-c.jpg", "reason": "비슷한 무대 에너지" }
+    ]
+  },
+  {
+    "id": "artist-03",
+    "name": "강변살롱",
+    "imageUrl": "/media/artists/artist-03.jpg",
+    "audioPreviewUrl": "/media/audio/artist-03.mp3",
+    "similarArtists": [
+      { "id": "sim-03-a", "name": "느린 오후", "imageUrl": "/media/similar/sim-03-a.jpg", "reason": "비슷한 장르 (재즈 퓨전)" },
+      { "id": "sim-03-b", "name": "라운지 401", "imageUrl": "/media/similar/sim-03-b.jpg", "reason": "비슷한 편곡 스타일" },
+      { "id": "sim-03-c", "name": "브라스 클럽", "imageUrl": "/media/similar/sim-03-c.jpg", "reason": "비슷한 악기 구성" }
+    ]
+  },
+  {
+    "id": "artist-04",
+    "name": "네온파도",
+    "imageUrl": "/media/artists/artist-04.jpg",
+    "audioPreviewUrl": "/media/audio/artist-04.mp3",
+    "similarArtists": [
+      { "id": "sim-04-a", "name": "8비트 노을", "imageUrl": "/media/similar/sim-04-a.jpg", "reason": "비슷한 장르 (신스웨이브)" },
+      { "id": "sim-04-b", "name": "글로우라인", "imageUrl": "/media/similar/sim-04-b.jpg", "reason": "비슷한 신스 톤" },
+      { "id": "sim-04-c", "name": "리트로시티", "imageUrl": "/media/similar/sim-04-c.jpg", "reason": "비슷한 레트로 무드" }
+    ]
+  },
+  {
+    "id": "artist-05",
+    "name": "도시유령",
+    "imageUrl": "/media/artists/artist-05.jpg",
+    "audioPreviewUrl": "/media/audio/artist-05.mp3",
+    "similarArtists": [
+      { "id": "sim-05-a", "name": "골목대장", "imageUrl": "/media/similar/sim-05-a.jpg", "reason": "비슷한 장르 (힙합)" },
+      { "id": "sim-05-b", "name": "자정라디오", "imageUrl": "/media/similar/sim-05-b.jpg", "reason": "비슷한 플로우" },
+      { "id": "sim-05-c", "name": "로우스텝", "imageUrl": "/media/similar/sim-05-c.jpg", "reason": "비슷한 가사 결" }
+    ]
+  },
+  {
+    "id": "artist-06",
+    "name": "잔잔한 소란",
+    "imageUrl": "/media/artists/artist-06.jpg",
+    "audioPreviewUrl": "/media/audio/artist-06.mp3",
+    "similarArtists": [
+      { "id": "sim-06-a", "name": "들풀", "imageUrl": "/media/similar/sim-06-a.jpg", "reason": "비슷한 장르 (인디 포크)" },
+      { "id": "sim-06-b", "name": "먼지의 계절", "imageUrl": "/media/similar/sim-06-b.jpg", "reason": "비슷한 어쿠스틱 질감" },
+      { "id": "sim-06-c", "name": "우편함", "imageUrl": "/media/similar/sim-06-c.jpg", "reason": "비슷한 가사 정서" }
+    ]
+  },
+  {
+    "id": "artist-07",
+    "name": "붉은고래",
+    "imageUrl": "/media/artists/artist-07.jpg",
+    "audioPreviewUrl": "/media/audio/artist-07.mp3",
+    "similarArtists": [
+      { "id": "sim-07-a", "name": "철갑선", "imageUrl": "/media/similar/sim-07-a.jpg", "reason": "비슷한 장르 (록밴드)" },
+      { "id": "sim-07-b", "name": "질주본능", "imageUrl": "/media/similar/sim-07-b.jpg", "reason": "비슷한 라이브 에너지" },
+      { "id": "sim-07-c", "name": "깨진기타", "imageUrl": "/media/similar/sim-07-c.jpg", "reason": "비슷한 사운드 텍스처" }
+    ]
+  },
+  {
+    "id": "artist-08",
+    "name": "야간비행",
+    "imageUrl": "/media/artists/artist-08.jpg",
+    "audioPreviewUrl": "/media/audio/artist-08.mp3",
+    "similarArtists": [
+      { "id": "sim-08-a", "name": "벨벳아워", "imageUrl": "/media/similar/sim-08-a.jpg", "reason": "비슷한 장르 (R&B/소울)" },
+      { "id": "sim-08-b", "name": "저녁의 색", "imageUrl": "/media/similar/sim-08-b.jpg", "reason": "비슷한 보컬 톤" },
+      { "id": "sim-08-c", "name": "스무스레인", "imageUrl": "/media/similar/sim-08-c.jpg", "reason": "비슷한 프로듀싱 스타일" }
+    ]
+  },
+  {
+    "id": "artist-09",
+    "name": "계절풍",
+    "imageUrl": "/media/artists/artist-09.jpg",
+    "audioPreviewUrl": "/media/audio/artist-09.mp3",
+    "similarArtists": [
+      { "id": "sim-09-a", "name": "안개주의보", "imageUrl": "/media/similar/sim-09-a.jpg", "reason": "비슷한 장르 (얼터너티브/드림팝)" },
+      { "id": "sim-09-b", "name": "먼바다", "imageUrl": "/media/similar/sim-09-b.jpg", "reason": "비슷한 사운드스케이프" },
+      { "id": "sim-09-c", "name": "회색구름", "imageUrl": "/media/similar/sim-09-c.jpg", "reason": "비슷한 분위기" }
     ]
   }
 ]
