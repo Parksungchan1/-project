@@ -1,0 +1,23 @@
+[
+  {
+    "id": "artist-01",
+    "name": "샘플 아티스트 1",
+    "imageUrl": "/media/artists/artist-01.jpg",
+    "audioPreviewUrl": "/media/audio/artist-01.mp3",
+    "similarArtists": [
+      { "id": "sim-01-a", "name": "유사 아티스트 A", "imageUrl": "/media/similar/sim-01-a.jpg", "reason": "비슷한 장르" },
+      { "id": "sim-01-b", "name": "유사 아티스트 B", "imageUrl": "/media/similar/sim-01-b.jpg", "reason": "비슷한 무드" },
+      { "id": "sim-01-c", "name": "유사 아티스트 C", "imageUrl": "/media/similar/sim-01-c.jpg", "reason": "비슷한 보컬 톤" }
+    ]
+  },
+  {
+    "id": "artist-02",
+    "name": "샘플 아티스트 2",
+    "imageUrl": "/media/artists/artist-02.jpg",
+    "audioPreviewUrl": "/media/audio/artist-02.mp3",
+    "similarArtists": [
+      { "id": "sim-02-a", "name": "유사 아티스트 D", "imageUrl": "/media/similar/sim-02-a.jpg", "reason": "비슷한 장르" },
+      { "id": "sim-02-b", "name": "유사 아티스트 E", "imageUrl": "/media/similar/sim-02-b.jpg", "reason": "비슷한 무드" }
+    ]
+  }
+]

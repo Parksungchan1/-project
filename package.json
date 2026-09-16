@@ -1,0 +1,18 @@
+{
+  "name": "festival-nfc-app",
+  "private": true,
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/admin-client"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev --workspace packages/server",
+    "dev:admin": "npm run dev --workspace packages/admin-client",
+    "build": "npm run build --workspace packages/shared && npm run build --workspace packages/server && npm run build --workspace packages/admin-client"
+  },
+  "allowScripts": {
+    "@serialport/bindings-cpp@12.0.1": true,
+    "esbuild@0.28.2": true
+  }
+}

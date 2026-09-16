@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>사용자앱 신호 테스트 (실제 UI 아님)</title>
+<style>
+  body { font-family: sans-serif; max-width: 480px; margin: 20px auto; padding: 0 12px; }
+  h1 { font-size: 18px; }
+  section { border: 1px solid #ccc; border-radius: 8px; padding: 12px; margin-bottom: 16px; }
+  button { display: block; width: 100%; padding: 10px; margin: 6px 0; font-size: 15px; }
+  #log { background: #111; color: #0f0; font-family: monospace; font-size: 12px; padding: 8px; height: 200px; overflow-y: auto; white-space: pre-wrap; }
+  .status { font-size: 13px; color: #555; }
+</style>
+</head>
+<body>
+  <h1>사용자앱 신호 테스트 (실제 UI 아님)</h1>
+  <p class="status">
+    이 페이지가 뜨면 NFC 태깅 → 웹페이지 열림은 확인된 것.
+    아래 버튼은 실제 카드 UI 자리에 들어갈 "출력요청" 신호만 확인용.
+    관리자는 이 페이지를 보지 않고 <a href="/admin.html">/admin.html</a>에서 확인합니다.
+  </p>
+
+  <section>
+    <div id="sessionStatus" class="status">세션 발급 중...</div>
+    <div id="artists"></div>
+  </section>
+
+  <section>
+    <b>로그</b>
+    <div id="log"></div>
+  </section>
+
+<script>
+  const logEl = document.getElementById('log');
+  function log(label, data) {
+    logEl.textContent += `[${new Date().toLocaleTimeString()}] ${label}\n${JSON.stringify(data, null, 2)}\n\n`;
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  let sessionId = null;
+
+  async function init() {
+    const res = await fetch('/api/session', { method: 'POST' });
+    const session = await res.json();
+    sessionId = session.id;
+    document.getElementById('sessionStatus').textContent = `세션 발급됨: ${sessionId}`;
+    log('POST /api/session', session);
+
+    const artistsRes = await fetch('/api/artists');
+    const artists = await artistsRes.json();
+    log('GET /api/artists', artists);
+
+    const container = document.getElementById('artists');
+    artists.forEach((artist) => {
+      const btn = document.createElement('button');
+      btn.textContent = `[${artist.name}] 선택 & 출력요청 보내기`;
+      btn.onclick = () => requestPrint(artist.id);
+      container.appendChild(btn);
+    });
+  }
+
+  async function requestPrint(artistId) {
+    const res = await fetch('/api/print-jobs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId, artistId }),
+    });
+    const data = await res.json();
+    log(`POST /api/print-jobs (artist=${artistId})`, data);
+  }
+
+  init();
+</script>
+</body>
+</html>
