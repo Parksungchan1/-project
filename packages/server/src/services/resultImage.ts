@@ -71,3 +71,24 @@ export function renderResultImage(artist: ArtistDetail): Buffer {
 export function renderResultImageBase64(artist: ArtistDetail): string {
   return renderResultImage(artist).toString("base64");
 }
+
+/** Simple centered-text strip, for a printer connectivity smoke test (e.g. "안녕"). */
+export function renderTextImage(text: string): Buffer {
+  const height = 160;
+  const canvas = createCanvas(WIDTH, height);
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, WIDTH, height);
+  ctx.fillStyle = "#000000";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "bold 48px sans-serif";
+  ctx.fillText(text, WIDTH / 2, height / 2);
+
+  return canvas.toBuffer("image/png");
+}
+
+export function renderTextImageBase64(text: string): string {
+  return renderTextImage(text).toString("base64");
+}

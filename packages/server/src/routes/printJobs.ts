@@ -1,14 +1,21 @@
+import { randomUUID } from "node:crypto";
 import { Router } from "express";
 import type { CreatePrintJobRequest, CreatePrintJobResponse, DequeuePrintJobResponse } from "@festival-nfc/shared";
 import { getArtist } from "../services/artistStore";
 import { getSession, setSelectedArtist } from "../services/sessionStore";
 import { dequeueNextJob, enqueueJob, getJob, getJobBySession, listRecentJobs, markJobCompleted, markJobFailed, queuePosition, retryJob } from "../services/printQueue";
 import { getResultImageBase64 } from "../services/resultImageStore";
+import { renderTextImageBase64 } from "../services/resultImage";
 import { requireAdminToken } from "../middleware/requireAdminToken";
 import { writeEndpointLimiter } from "../middleware/rateLimit";
 import { getAdminHeartbeat, recordAdminHeartbeat } from "../services/adminHeartbeat";
 
 export const printJobsRouter = Router();
+
+// Sentinel artistId for /print-jobs/test-print jobs -- not a real artist, so
+// getArtist() below returns undefined and the admin page falls back to a
+// friendly label instead of showing this raw id.
+const TEST_ARTIST_ID = "__test__";
 
 // --- User-facing: create a print job from the phone webapp ---
 printJobsRouter.post("/print-jobs", writeEndpointLimiter, (req, res) => {
@@ -49,6 +56,18 @@ printJobsRouter.post("/print-jobs", writeEndpointLimiter, (req, res) => {
   res.status(201).json(response);
 });
 
+// --- Admin-only: printer connectivity smoke test, no NFC/session needed.
+// Renders short text (default "안녕") to an image and drops it in the same
+// queue admin-client already polls, so it exercises the real print path.
+printJobsRouter.post("/print-jobs/test-print", requireAdminToken, (req, res) => {
+  const body = req.body as { text?: unknown } | undefined;
+  const text = typeof body?.text === "string" && body.text.trim() ? body.text.trim().slice(0, 20) : "안녕";
+  const imageBase64 = renderTextImageBase64(text);
+  const job = enqueueJob(`test-${randomUUID()}`, TEST_ARTIST_ID, imageBase64);
+  const response: CreatePrintJobResponse = { jobId: job.id, queuePosition: queuePosition(job.id) };
+  res.status(201).json(response);
+});
+
 // --- Admin-only: the booth laptop polls/acts on these ---
 printJobsRouter.post("/print-jobs/dequeue", requireAdminToken, (_req, res) => {
   recordAdminHeartbeat(); // admin-client's automatic loop hits this every poll cycle
@@ -82,7 +101,7 @@ printJobsRouter.get("/print-jobs", requireAdminToken, (_req, res) => {
   const jobs = listRecentJobs().map((job) => ({
     ...job,
     imageBase64: undefined, // too big for a log list; strip it out
-    artistName: getArtist(job.artistId)?.name ?? job.artistId,
+    artistName: job.artistId === TEST_ARTIST_ID ? "테스트 인쇄" : (getArtist(job.artistId)?.name ?? job.artistId),
   }));
   res.json({ jobs, adminClientLastSeen: getAdminHeartbeat() });
 });

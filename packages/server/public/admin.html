@@ -29,6 +29,8 @@
   .completed { background: #dcfce7; color: #166534; }
   .failed { background: #fee2e2; color: #991b1b; }
   .retryBtn { padding: 6px 12px; border: none; border-radius: 6px; background: #991b1b; color: #fff; font-size: 13px; cursor: pointer; }
+  .testBtn { padding: 10px 14px; border: none; border-radius: 8px; background: #2563eb; color: #fff; font-size: 14px; cursor: pointer; margin-bottom: 16px; }
+  .testBtn:disabled { background: #93c5fd; cursor: default; }
 </style>
 </head>
 <body>
@@ -40,6 +42,8 @@
   <input id="adminToken" placeholder="ADMIN_TOKEN 입력 (.env와 동일하게)" />
 
   <div id="connBar" class="unknown">프린터 연결 프로그램 상태 확인 중...</div>
+
+  <button class="testBtn" id="testPrintBtn" onclick="testPrint()">🖨 테스트 인쇄 ("안녕")</button>
 
   <div id="current">
     <div class="label">최근 요청</div>
@@ -93,6 +97,24 @@
     refresh();
   }
   window.retry = retry;
+
+  async function testPrint() {
+    const token = getToken();
+    const btn = document.getElementById('testPrintBtn');
+    btn.disabled = true;
+    try {
+      const res = await fetch('/api/print-jobs/test-print', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify({ text: '안녕' }),
+      });
+      if (!res.ok) alert(`테스트 인쇄 요청 실패 (${res.status})`);
+      refresh();
+    } finally {
+      btn.disabled = false;
+    }
+  }
+  window.testPrint = testPrint;
 
   async function refresh() {
     const token = getToken();
