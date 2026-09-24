@@ -19,6 +19,8 @@ app.use(express.json({ limit: "1mb" }));
 // test.html: throwaway signal-testing harness, not the real UI (that's built
 // separately). NFC tag can point straight at /test.html to verify tap-to-open.
 app.use(express.static(join(__dirname, "..", "public")));
+// Artist photos/album art/audio previews, referenced by artists.json as /media/... .
+app.use("/media", express.static(join(__dirname, "..", "assets", "media")));
 
 app.use("/api", sessionRouter);
 app.use("/api", artistsRouter);

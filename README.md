@@ -6,7 +6,7 @@ npm workspaces 모노레포. 3개 패키지:
 - `packages/server` — 사용자 웹앱이 호출하는 API 서버 (Express + TS). 클라우드에 배포.
 - `packages/admin-client` — 부스 랩탑에서 상시 실행. 서버의 출력 큐를 폴링하고, T02 프린터에 블루투스(COM 포트)로 전송.
 
-사용자 웹앱 UI는 별도(직접 작업). 이 저장소는 그 UI가 호출할 API와, 프린터로 가는 백엔드 경로만 다룹니다.
+사용자 웹앱 UI는 별도 저장소(`https://github.com/Jun11561/SH_PT`, "wavelog", `packages/shared`의 `Artist`/`Song` 타입에 맞춰 연동됨). 이 저장소는 그 UI가 호출할 API와, 프린터로 가는 백엔드 경로만 다룹니다.
 
 ## 개발 준비
 
@@ -31,13 +31,12 @@ npm run dev:admin
 
 ## 아직 손대야 할 부분
 
-1. **아티스트 데이터** — `packages/server/src/data/artists.json`에 샘플 2개만 있음. 실제 9팀 + 유사 아티스트로 채워야 함.
-2. **이미지/음원** — `imageUrl`/`audioPreviewUrl`은 자리표시자 경로. 실제 파일이 정해지면 정적 파일로 서빙하거나 CDN에 올리고 경로만 교체. (라이선스 확인 필요 — 대화에서 논의한 부분)
-3. **결과지(출력물) 이미지** — 9명 고정이라 결과지도 9종류로 고정. `packages/server/assets/results/<artistId>.png`에 완성된 디자인 파일(384px 폭)을 넣으면 서버가 그걸 그대로 큐에 태움. 아직 파일이 없으면 `resultImage.ts`가 자동 생성한 플레이스홀더로 대체됨 (콘솔에 경고 로그 남음). 매 요청마다 새로 그리지 않고 서버 시작 시 9개를 한 번만 로드해서 재사용.
-4. **한글 폰트** — 결과지 플레이스홀더를 자동 생성할 때(위 3번의 대체 경로) 한글이 들어가는데, 클라우드 리눅스 서버엔 한글 폰트가 기본 설치되어 있지 않을 수 있음. `packages/server/assets/fonts/korean.ttf`에 폰트 파일(예: Noto Sans KR)을 넣으면 자동 등록됨. 실제 디자인 PNG를 넣으면 이 문제 자체가 사라짐.
-5. **프린터 프로토콜 검증** — `printerProtocol.ts`의 명령 바이트는 Phomemo 계열 리버스엔지니어링 문서(vivier/phomemo-tools) 기준 추정치. 실제 T02 기기로 테스트해서 맞는지 확인 필요. 특히 T02가 Classic Bluetooth(SPP, 현재 구현 전제)인지 BLE인지부터 확인 — `bluetoothPrinter.ts`는 SPP(COM 포트) 전제로 작성됨.
-6. **배포** — 서버를 어느 클라우드(예: Railway, Render, Fly.io 등)에 올릴지 아직 미정.
-7. **인증 토큰** — `ADMIN_TOKEN`을 서버와 admin-client 양쪽 `.env`에 동일하게 설정해야 관리자 API(큐 꺼내기 등)가 동작함.
+1. **결과지(출력물) 이미지** — 9명 고정이라 결과지도 9종류로 고정. `packages/server/assets/results/<artistId>.png`에 완성된 디자인 파일(384px 폭)을 넣으면 서버가 그걸 그대로 큐에 태움. 아직 파일이 없어서 `resultImage.ts`가 화면상 영수증(`Receipt.tsx`)과 같은 레이아웃을 캔버스로 자동 생성해 대체 중 — 실기기 인쇄까지 검증됨(README 하단 참고). 손으로 디자인한 PNG를 넣으면 이걸 대체.
+2. **한글 폰트** — 위 1번의 자동생성 대체 경로에 한글이 들어가는데, 클라우드 리눅스 서버엔 한글 폰트가 기본 설치되어 있지 않을 수 있음. `packages/server/assets/fonts/korean.ttf`에 폰트 파일(예: Noto Sans KR)을 넣으면 자동 등록됨(gitignore됨 — 라이선스 문제로 커밋 안 함, 로컬엔 Malgun Gothic으로 채워둔 상태). 손으로 디자인한 PNG로 교체하면 이 문제 자체가 사라짐.
+3. **배포** — 서버를 어느 클라우드(예: Railway, Render, Fly.io 등)에 올릴지 아직 미정.
+4. **인증 토큰** — `ADMIN_TOKEN`을 서버와 admin-client 양쪽 `.env`에 동일하게 설정해야 관리자 API(큐 꺼내기 등)가 동작함.
+
+**아티스트 데이터/이미지, 오디오, 프린터 프로토콜 검증은 완료됨.** 오디오는 mp3 파일이 아니라 `Artist.youtubeVideoId`(각 곡의 YouTube 공식 업로드)를 화면에 안 보이게 임베드해서 재생 — 저작권 있는 실제 음원이라 자체 파일로 호스팅하지 않기로 함. 프린터는 아래 "프린터 연결하면 바로 동작하나?" 참고.
 
 ## API 요약
 

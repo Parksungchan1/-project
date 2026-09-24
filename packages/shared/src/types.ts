@@ -2,22 +2,33 @@
 // The user-facing frontend (built separately) can also import this package
 // if it's set up as part of the same workspace later.
 
+export interface Song {
+  title: string;
+  artist: string;
+  /** "mm:ss" format, e.g. "03:20" */
+  playtime: string;
+  coverUrl: string;
+  /** true if coverUrl already has the title/artist text baked into the image */
+  coverHasText?: boolean;
+}
+
 export interface Artist {
   id: string;
   name: string;
+  /** short label for the "재생중..." caption when name is too long to fit */
+  shortName?: string;
+  /** e.g. "DAY 1 · 126 스테이지" */
+  stage: string;
+  /** up to 3 short tags shown on the artist card */
+  tags: string[];
   imageUrl: string;
-  audioPreviewUrl: string;
-}
-
-export interface SimilarArtist {
-  id: string;
-  name: string;
-  imageUrl: string;
-  reason?: string; // e.g. "비슷한 장르", short blurb shown under the name
-}
-
-export interface ArtistDetail extends Artist {
-  similarArtists: SimilarArtist[];
+  /** YouTube video id (the v= param) of the official upload of mainSong -- played in a hidden player as background audio. */
+  youtubeVideoId: string;
+  mainSong: Song;
+  /** similar songs shown on the result screen and printed on the receipt */
+  similarSongs: Song[];
+  /** short blurb printed on the receipt, e.g. "여자 솔로 / 인디" */
+  keywords: string;
 }
 
 export interface Session {

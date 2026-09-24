@@ -1,101 +1,455 @@
 [
   {
-    "id": "artist-01",
-    "name": "무드라이트",
-    "imageUrl": "/media/artists/artist-01.jpg",
-    "audioPreviewUrl": "/media/audio/artist-01.mp3",
-    "similarArtists": [
-      { "id": "sim-01-a", "name": "잔물결", "imageUrl": "/media/similar/sim-01-a.jpg", "reason": "비슷한 장르 (드림팝)" },
-      { "id": "sim-01-b", "name": "소프트포커스", "imageUrl": "/media/similar/sim-01-b.jpg", "reason": "비슷한 무드" },
-      { "id": "sim-01-c", "name": "창가의 밤", "imageUrl": "/media/similar/sim-01-c.jpg", "reason": "비슷한 보컬 톤" }
-    ]
+    "id": "yoonmarch",
+    "name": "윤마치 (MRCH)",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "청량",
+      "인디",
+      "여성솔로"
+    ],
+    "imageUrl": "/media/artists/yoonmarch/photo.jpg",
+    "youtubeVideoId": "5XnKq8UykXw",
+    "mainSong": {
+      "title": "Color It",
+      "artist": "윤마치 (MRCH)",
+      "playtime": "03:20",
+      "coverUrl": "/media/artists/yoonmarch/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "미친건가",
+        "artist": "주혜린",
+        "playtime": "03:22",
+        "coverUrl": "/media/artists/yoonmarch/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "금붕어",
+        "artist": "한로로",
+        "playtime": "03:32",
+        "coverUrl": "/media/artists/yoonmarch/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "곰팡이",
+        "artist": "공원",
+        "playtime": "03:29",
+        "coverUrl": "/media/artists/yoonmarch/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "클라우드 쿠쿠랜드",
+        "artist": "정우",
+        "playtime": "03:36",
+        "coverUrl": "/media/artists/yoonmarch/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "여자 솔로 / 인디",
+    "shortName": "윤마치"
   },
   {
-    "id": "artist-02",
-    "name": "블랙사운드 시스템",
-    "imageUrl": "/media/artists/artist-02.jpg",
-    "audioPreviewUrl": "/media/audio/artist-02.mp3",
-    "similarArtists": [
-      { "id": "sim-02-a", "name": "파장", "imageUrl": "/media/similar/sim-02-a.jpg", "reason": "비슷한 장르 (일렉트로닉)" },
-      { "id": "sim-02-b", "name": "그리드나이트", "imageUrl": "/media/similar/sim-02-b.jpg", "reason": "비슷한 비트감" },
-      { "id": "sim-02-c", "name": "서브베이스", "imageUrl": "/media/similar/sim-02-c.jpg", "reason": "비슷한 무대 에너지" }
-    ]
+    "id": "touched",
+    "name": "터치드",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "강렬",
+      "밴드",
+      "하드사운드"
+    ],
+    "imageUrl": "/media/artists/touched/photo.jpg",
+    "youtubeVideoId": "qlpaukDvEr4",
+    "mainSong": {
+      "title": "Alive",
+      "artist": "터치드",
+      "playtime": "03:32",
+      "coverUrl": "/media/artists/touched/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "Bad Sniper",
+        "artist": "터치드",
+        "playtime": "03:34",
+        "coverUrl": "/media/artists/touched/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "Player 1",
+        "artist": "KARDI (카디)",
+        "playtime": "03:39",
+        "coverUrl": "/media/artists/touched/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "Rush",
+        "artist": "더 픽스",
+        "playtime": "03:31",
+        "coverUrl": "/media/artists/touched/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "먹이사슬",
+        "artist": "한로로",
+        "playtime": "03:22",
+        "coverUrl": "/media/artists/touched/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "강한 사운드 / 밴드"
   },
   {
-    "id": "artist-03",
-    "name": "강변살롱",
-    "imageUrl": "/media/artists/artist-03.jpg",
-    "audioPreviewUrl": "/media/audio/artist-03.mp3",
-    "similarArtists": [
-      { "id": "sim-03-a", "name": "느린 오후", "imageUrl": "/media/similar/sim-03-a.jpg", "reason": "비슷한 장르 (재즈 퓨전)" },
-      { "id": "sim-03-b", "name": "라운지 401", "imageUrl": "/media/similar/sim-03-b.jpg", "reason": "비슷한 편곡 스타일" },
-      { "id": "sim-03-c", "name": "브라스 클럽", "imageUrl": "/media/similar/sim-03-c.jpg", "reason": "비슷한 악기 구성" }
-    ]
+    "id": "owol",
+    "name": "오월오일",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "청량",
+      "밴드",
+      "초여름"
+    ],
+    "imageUrl": "/media/artists/owol/photo.jpg",
+    "youtubeVideoId": "H6GIe4-JHAM",
+    "mainSong": {
+      "title": "Lunch Time",
+      "artist": "오월오일 ( 五月五日 )",
+      "playtime": "03:17",
+      "coverUrl": "/media/artists/owol/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "슈슈",
+        "artist": "신인류",
+        "playtime": "04:10",
+        "coverUrl": "/media/artists/owol/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "New Hippie Generation",
+        "artist": "페퍼톤스",
+        "playtime": "03:44",
+        "coverUrl": "/media/artists/owol/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "아멜리아",
+        "artist": "포터블 구르브 나인",
+        "playtime": "04:12",
+        "coverUrl": "/media/artists/owol/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "눈이 마주쳤을때",
+        "artist": "O.O.O",
+        "playtime": "03:17",
+        "coverUrl": "/media/artists/owol/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "초여름 / 동화st"
   },
   {
-    "id": "artist-04",
-    "name": "네온파도",
-    "imageUrl": "/media/artists/artist-04.jpg",
-    "audioPreviewUrl": "/media/audio/artist-04.mp3",
-    "similarArtists": [
-      { "id": "sim-04-a", "name": "8비트 노을", "imageUrl": "/media/similar/sim-04-a.jpg", "reason": "비슷한 장르 (신스웨이브)" },
-      { "id": "sim-04-b", "name": "글로우라인", "imageUrl": "/media/similar/sim-04-b.jpg", "reason": "비슷한 신스 톤" },
-      { "id": "sim-04-c", "name": "리트로시티", "imageUrl": "/media/similar/sim-04-c.jpg", "reason": "비슷한 레트로 무드" }
-    ]
+    "id": "atlus",
+    "name": "ATLUS sound team",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "인트로",
+      "재즈",
+      "느좋"
+    ],
+    "imageUrl": "/media/artists/atlus/photo.jpg",
+    "youtubeVideoId": "j9Sn1nFGQQ8",
+    "mainSong": {
+      "title": "Color Your Night",
+      "artist": "ATLUS Sound Team",
+      "playtime": "03:47",
+      "coverUrl": "/media/artists/atlus/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "COMPLEX",
+        "artist": "고고학",
+        "playtime": "05:11",
+        "coverUrl": "/media/artists/atlus/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "GOGO",
+        "artist": "심아일랜드",
+        "playtime": "03:42",
+        "coverUrl": "/media/artists/atlus/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "GOSU",
+        "artist": "라쿠네라마",
+        "playtime": "02:49",
+        "coverUrl": "/media/artists/atlus/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "Ghosts are bored",
+        "artist": "87DANCE",
+        "playtime": "01:12",
+        "coverUrl": "/media/artists/atlus/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "인트로느좋 / 얼터너티브",
+    "shortName": "ATLUS"
   },
   {
-    "id": "artist-05",
-    "name": "도시유령",
-    "imageUrl": "/media/artists/artist-05.jpg",
-    "audioPreviewUrl": "/media/audio/artist-05.mp3",
-    "similarArtists": [
-      { "id": "sim-05-a", "name": "골목대장", "imageUrl": "/media/similar/sim-05-a.jpg", "reason": "비슷한 장르 (힙합)" },
-      { "id": "sim-05-b", "name": "자정라디오", "imageUrl": "/media/similar/sim-05-b.jpg", "reason": "비슷한 플로우" },
-      { "id": "sim-05-c", "name": "로우스텝", "imageUrl": "/media/similar/sim-05-c.jpg", "reason": "비슷한 가사 결" }
-    ]
+    "id": "leedoor",
+    "name": "리도어",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "몽환",
+      "밴드",
+      "서정적인"
+    ],
+    "imageUrl": "/media/artists/leedoor/photo.jpg",
+    "youtubeVideoId": "ydx6O9ZWlDU",
+    "mainSong": {
+      "title": "영원은 그렇듯",
+      "artist": "리도어",
+      "playtime": "03:58",
+      "coverUrl": "/media/artists/leedoor/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "춤을 춰요",
+        "artist": "라쿠나",
+        "playtime": "04:20",
+        "coverUrl": "/media/artists/leedoor/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "열기구",
+        "artist": "SURL (설)",
+        "playtime": "03:59",
+        "coverUrl": "/media/artists/leedoor/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "Ride",
+        "artist": "wave to earth",
+        "playtime": "03:48",
+        "coverUrl": "/media/artists/leedoor/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "LOBSTER KING",
+        "artist": "Tuesday Beach Club",
+        "playtime": "03:17",
+        "coverUrl": "/media/artists/leedoor/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "서정적인 / 몽환적인"
   },
   {
-    "id": "artist-06",
-    "name": "잔잔한 소란",
-    "imageUrl": "/media/artists/artist-06.jpg",
-    "audioPreviewUrl": "/media/audio/artist-06.mp3",
-    "similarArtists": [
-      { "id": "sim-06-a", "name": "들풀", "imageUrl": "/media/similar/sim-06-a.jpg", "reason": "비슷한 장르 (인디 포크)" },
-      { "id": "sim-06-b", "name": "먼지의 계절", "imageUrl": "/media/similar/sim-06-b.jpg", "reason": "비슷한 어쿠스틱 질감" },
-      { "id": "sim-06-c", "name": "우편함", "imageUrl": "/media/similar/sim-06-c.jpg", "reason": "비슷한 가사 정서" }
-    ]
+    "id": "oneokrock",
+    "name": "ONE OK ROCK",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "밴드",
+      "달리자",
+      "락사운드"
+    ],
+    "imageUrl": "/media/artists/oneokrock/photo.jpg",
+    "youtubeVideoId": "NWDAjOsTYC8",
+    "mainSong": {
+      "title": "完全感覚Dreamer",
+      "artist": "ONE OK ROCK",
+      "playtime": "04:12",
+      "coverUrl": "/media/artists/oneokrock/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "Get Your Gun",
+        "artist": "브로큰발렌타인",
+        "playtime": "03:37",
+        "coverUrl": "/media/artists/oneokrock/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "비켜ㅕㅕㅕ",
+        "artist": "Snake Chicken Soup",
+        "playtime": "04:31",
+        "coverUrl": "/media/artists/oneokrock/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "집 (feat. 유미)",
+        "artist": "극동아시아타이거즈",
+        "playtime": "03:28",
+        "coverUrl": "/media/artists/oneokrock/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "혁명의 연인들",
+        "artist": "전기뱀장어",
+        "playtime": "03:45",
+        "coverUrl": "/media/artists/oneokrock/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "달리는 / 락 사운드"
   },
   {
-    "id": "artist-07",
-    "name": "붉은고래",
-    "imageUrl": "/media/artists/artist-07.jpg",
-    "audioPreviewUrl": "/media/audio/artist-07.mp3",
-    "similarArtists": [
-      { "id": "sim-07-a", "name": "철갑선", "imageUrl": "/media/similar/sim-07-a.jpg", "reason": "비슷한 장르 (록밴드)" },
-      { "id": "sim-07-b", "name": "질주본능", "imageUrl": "/media/similar/sim-07-b.jpg", "reason": "비슷한 라이브 에너지" },
-      { "id": "sim-07-c", "name": "깨진기타", "imageUrl": "/media/similar/sim-07-c.jpg", "reason": "비슷한 사운드 텍스처" }
-    ]
+    "id": "juhyerin",
+    "name": "주혜린",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "하우스",
+      "전자음악",
+      "감도높은"
+    ],
+    "imageUrl": "/media/artists/juhyerin/photo.jpg",
+    "youtubeVideoId": "1KX9Z9TFoos",
+    "mainSong": {
+      "title": "BUSY BOY",
+      "artist": "주혜린",
+      "playtime": "03:15",
+      "coverUrl": "/media/artists/juhyerin/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "Hit the Bang",
+        "artist": "라쿠네라마",
+        "playtime": "04:55",
+        "coverUrl": "/media/artists/juhyerin/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "HEADLOCK",
+        "artist": "Luci Gang",
+        "playtime": "01:59",
+        "coverUrl": "/media/artists/juhyerin/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "집 (feat. 유미)",
+        "artist": "하우즈룰즈",
+        "playtime": "04:05",
+        "coverUrl": "/media/artists/juhyerin/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "Intro(Absolute)",
+        "artist": "롤러코스터",
+        "playtime": "01:12",
+        "coverUrl": "/media/artists/juhyerin/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "하우스 풍 / 고감도"
   },
   {
-    "id": "artist-08",
-    "name": "야간비행",
-    "imageUrl": "/media/artists/artist-08.jpg",
-    "audioPreviewUrl": "/media/audio/artist-08.mp3",
-    "similarArtists": [
-      { "id": "sim-08-a", "name": "벨벳아워", "imageUrl": "/media/similar/sim-08-a.jpg", "reason": "비슷한 장르 (R&B/소울)" },
-      { "id": "sim-08-b", "name": "저녁의 색", "imageUrl": "/media/similar/sim-08-b.jpg", "reason": "비슷한 보컬 톤" },
-      { "id": "sim-08-c", "name": "스무스레인", "imageUrl": "/media/similar/sim-08-c.jpg", "reason": "비슷한 프로듀싱 스타일" }
-    ]
+    "id": "87dance",
+    "name": "87DANCE",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "리듬감",
+      "밴드",
+      "박자감"
+    ],
+    "imageUrl": "/media/artists/87dance/photo.jpg",
+    "youtubeVideoId": "OXeLRxNqN6g",
+    "mainSong": {
+      "title": "Beautiful Complex",
+      "artist": "87DANCE",
+      "playtime": "03:42",
+      "coverUrl": "/media/artists/87dance/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "Skunk (feat. Cory Wong)",
+        "artist": "Bump2Soul",
+        "playtime": "04:26",
+        "coverUrl": "/media/artists/87dance/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "의심스러워",
+        "artist": "술탄오브더디스코",
+        "playtime": "03:35",
+        "coverUrl": "/media/artists/87dance/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "곱슬머리",
+        "artist": "잭킹콩",
+        "playtime": "03:22",
+        "coverUrl": "/media/artists/87dance/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "WHAT TIME IS IT NOW?",
+        "artist": "SURL (설)",
+        "playtime": "03:35",
+        "coverUrl": "/media/artists/87dance/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "구르브한 / 박자감있는",
+    "shortName": "87댄스"
   },
   {
-    "id": "artist-09",
-    "name": "계절풍",
-    "imageUrl": "/media/artists/artist-09.jpg",
-    "audioPreviewUrl": "/media/audio/artist-09.mp3",
-    "similarArtists": [
-      { "id": "sim-09-a", "name": "안개주의보", "imageUrl": "/media/similar/sim-09-a.jpg", "reason": "비슷한 장르 (얼터너티브/드림팝)" },
-      { "id": "sim-09-b", "name": "먼바다", "imageUrl": "/media/similar/sim-09-b.jpg", "reason": "비슷한 사운드스케이프" },
-      { "id": "sim-09-c", "name": "회색구름", "imageUrl": "/media/similar/sim-09-c.jpg", "reason": "비슷한 분위기" }
-    ]
+    "id": "yb",
+    "name": "YB",
+    "stage": "DAY 1 · 126 스테이지",
+    "tags": [
+      "하드사운드",
+      "인디",
+      "솔로"
+    ],
+    "imageUrl": "/media/artists/yb/photo.jpg",
+    "youtubeVideoId": "Ht-ykmyS418",
+    "mainSong": {
+      "title": "Rebellion (feat. Xdinary Heroes)",
+      "artist": "YB",
+      "playtime": "03:45",
+      "coverUrl": "/media/artists/yb/album.jpg",
+      "coverHasText": true
+    },
+    "similarSongs": [
+      {
+        "title": "iNSTEAD!",
+        "artist": "Xdinary Heroes",
+        "playtime": "02:57",
+        "coverUrl": "/media/artists/yb/sim1.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "울트라맨이야",
+        "artist": "서태지",
+        "playtime": "03:25",
+        "coverUrl": "/media/artists/yb/sim2.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "Drown",
+        "artist": "Bring Me The Horizon",
+        "playtime": "03:42",
+        "coverUrl": "/media/artists/yb/sim3.jpg",
+        "coverHasText": false
+      },
+      {
+        "title": "Killing In the Name",
+        "artist": "Rage Against The Machine",
+        "playtime": "05:13",
+        "coverUrl": "/media/artists/yb/sim4.jpg",
+        "coverHasText": false
+      }
+    ],
+    "keywords": "하드 / 강한 / 난해한"
   }
 ]

@@ -3,9 +3,3 @@ dist/
 *.log
 .env
 .env.local
-
-# Windows-bundled font (Malgun Gothic), copied in locally so Korean text
-# renders during dev/testing. Don't redistribute it -- it's not ours to
-# ship. Deploy target needs an open-license Korean font instead (e.g. Noto
-# Sans KR) dropped at this same path.
-packages/server/assets/fonts/
