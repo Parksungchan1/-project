@@ -92,6 +92,24 @@ const LOGO_DOT = { cx: 32.5, cy: 7.3, r: 5.3 };
 const LOGO_RENDER_WIDTH = 56;
 const LOGO_RENDER_HEIGHT = (LOGO_VIEWBOX.h * LOGO_RENDER_WIDTH) / LOGO_VIEWBOX.w;
 
+/**
+ * fillText, redrawn a few times at sub-pixel offsets. A single bold-weight
+ * draw still leaves small glyphs mostly anti-aliased gray at the stroke edges,
+ * which the printer's 1-bit threshold throws away; stacking slightly offset
+ * copies compounds that partial coverage until the edges read as solid ink.
+ * Print-only -- the on-screen receipt doesn't need this.
+ */
+function fillTextBold(ctx: SKRSContext2D, text: string, x: number, y: number): void {
+  for (const [dx, dy] of [
+    [0, 0],
+    [0.6, 0],
+    [0, 0.6],
+    [0.6, 0.6],
+  ]) {
+    ctx.fillText(text, x + dx, y + dy);
+  }
+}
+
 /** Draws the wavelog icon mark centered horizontally, top edge at `topY`. */
 function drawLogo(ctx: SKRSContext2D, topY: number): void {
   const scale = LOGO_RENDER_WIDTH / LOGO_VIEWBOX.w;
@@ -184,17 +202,17 @@ export function renderResultImage(artist: Artist): Buffer {
   ctx.textAlign = "left";
   ctx.fillStyle = "#000000";
   ctx.font = "bold 13px sans-serif";
-  ctx.fillText("DATE", PADDING, y);
+  fillTextBold(ctx, "DATE", PADDING, y);
   ctx.font = "bold 13px sans-serif";
   // Printer has no gray -- a mid-gray fill leaves even less of a small font's
   // anti-aliased stroke above the ink threshold than black would, so secondary
   // text prints solid black here even though it's gray on screen.
   ctx.fillStyle = "#000000";
-  ctx.fillText(todayDate(), PADDING + 40, y);
+  fillTextBold(ctx, todayDate(), PADDING + 40, y);
   ctx.textAlign = "right";
   ctx.fillStyle = "#000000";
   ctx.font = "bold 13px sans-serif";
-  ctx.fillText("Wavelog", WIDTH - PADDING, y);
+  fillTextBold(ctx, "Wavelog", WIDTH - PADDING, y);
   y += 10;
   strokeLine(ctx, y, "solid");
   y += 20;
@@ -203,10 +221,10 @@ export function renderResultImage(artist: Artist): Buffer {
   ctx.textAlign = "left";
   ctx.font = "bold 12px sans-serif";
   ctx.fillStyle = "#000000";
-  ctx.fillText("N.", COLS[0].x, y);
-  ctx.fillText("SONG", COLS[1].x, y);
-  ctx.fillText("ARTIST", COLS[2].x, y);
-  ctx.fillText("PLAYTIME", COLS[3].x, y);
+  fillTextBold(ctx, "N.", COLS[0].x, y);
+  fillTextBold(ctx, "SONG", COLS[1].x, y);
+  fillTextBold(ctx, "ARTIST", COLS[2].x, y);
+  fillTextBold(ctx, "PLAYTIME", COLS[3].x, y);
   y += 10;
   strokeLine(ctx, y, "dashed");
   y += 20;
@@ -219,23 +237,23 @@ export function renderResultImage(artist: Artist): Buffer {
     ctx.textAlign = "left";
     ctx.font = "bold 13px sans-serif";
     ctx.fillStyle = "#000000";
-    ctx.fillText(String(i + 1).padStart(2, "0"), COLS[0].x, textY);
+    fillTextBold(ctx, String(i + 1).padStart(2, "0"), COLS[0].x, textY);
 
     ctx.font = TITLE_FONT;
     ctx.fillStyle = "#000000";
     wrapText(ctx, song.title, COLS[1].width - 4).forEach((line, li) => {
-      ctx.fillText(line, COLS[1].x, textY + li * ROW_LINE_HEIGHT);
+      fillTextBold(ctx, line, COLS[1].x, textY + li * ROW_LINE_HEIGHT);
     });
 
     ctx.font = ARTIST_FONT;
     ctx.fillStyle = "#000000";
     wrapText(ctx, song.artist, COLS[2].width - 4).forEach((line, li) => {
-      ctx.fillText(line, COLS[2].x, textY + li * ROW_LINE_HEIGHT);
+      fillTextBold(ctx, line, COLS[2].x, textY + li * ROW_LINE_HEIGHT);
     });
 
     ctx.font = "bold 13px sans-serif";
     ctx.fillStyle = "#000000";
-    ctx.fillText(song.playtime, COLS[3].x, textY);
+    fillTextBold(ctx, song.playtime, COLS[3].x, textY);
 
     y = rowTop + rowHeight;
   });
@@ -247,21 +265,21 @@ export function renderResultImage(artist: Artist): Buffer {
   ctx.textAlign = "left";
   ctx.font = "bold 13px sans-serif";
   ctx.fillStyle = "#000000";
-  ctx.fillText("키워드", COLS[0].x, totalTextY);
+  fillTextBold(ctx, "키워드", COLS[0].x, totalTextY);
 
   ctx.font = TITLE_FONT;
   ctx.fillStyle = "#000000";
   keywordLines.forEach((line, li) => {
-    ctx.fillText(line, COLS[1].x, totalTextY + li * ROW_LINE_HEIGHT);
+    fillTextBold(ctx, line, COLS[1].x, totalTextY + li * ROW_LINE_HEIGHT);
   });
 
   ctx.font = "bold 13px sans-serif";
   ctx.fillStyle = "#000000";
-  ctx.fillText("총", COLS[2].x, totalTextY);
+  fillTextBold(ctx, "총", COLS[2].x, totalTextY);
 
   ctx.font = "bold 13px sans-serif";
   ctx.fillStyle = "#000000";
-  ctx.fillText(totalPlaytime, COLS[3].x, totalTextY);
+  fillTextBold(ctx, totalPlaytime, COLS[3].x, totalTextY);
 
   y += totalRowHeight - 10;
   strokeLine(ctx, y, "solid");
