@@ -79,6 +79,10 @@
 로컬에서만 돌리던 `packages/admin-client`가 이제 클라우드 백엔드의 출력 큐를 보도록 바꿔야
 실제로 폰에서 누른 "출력하기"가 프린터로 나갑니다.
 
+> 이미 이 백엔드/프론트엔드가 배포되어 있고 **다른 장소에 프린터만 새로 연결**하려는 거라면
+> (예: 새 컴퓨터에서 admin-client만 새로 띄우는 경우), 이 문서를 처음부터 따라할 필요 없이
+> [`PRINTER_SETUP.md`](./PRINTER_SETUP.md)만 보면 됩니다.
+
 1. `packages/admin-client/.env` 수정:
    ```
    SERVER_URL=<1번에서 발급받은 백엔드 공개 URL>
