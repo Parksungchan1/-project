@@ -71,3 +71,23 @@ npm run dev:admin
 4. T02가 Classic Bluetooth(SPP)가 아니라 BLE라면 `bluetoothPrinter.ts`(COM 포트 기반) 자체를 Web Bluetooth나 Android BLE API 기반으로 다시 짜야 함 — 페어링 시 COM 포트가 배정되는지 여부로 판별 가능
 
 즉 "신호가 오가고 관리자가 인지하는 부분"은 되지만, "실제로 종이에 정확히 인쇄되는 것"은 프린터 받으신 후 같이 디버깅이 필요합니다.
+
+### admin-client를 macOS(아이맥 등)에서 실행하기
+
+`admin-client`는 `serialport` 라이브러리를 쓰는 순수 Node.js 프로그램이라 코드 수정 없이
+macOS에서도 그대로 돌아갑니다 (Windows 전용 코드 없음). 다른 점은 페어링된 프린터가
+드러나는 경로 형식뿐입니다:
+
+- Windows: `COM5` 같은 COM 포트
+- macOS: `/dev/cu.T02-SPPDev-1` 같은 시리얼 장치 경로
+
+절차:
+1. macOS **시스템 설정 → Bluetooth**에서 T02 페어링
+2. `packages/admin-client`에서 `npm run list-ports` 실행 → 페어링된 프린터에 해당하는
+   경로를 찾음 (페어링 직후 실행해야 목록에 뜸)
+3. `.env`의 `PRINTER_COM_PORT`에 그 경로를 그대로 넣음, `DRY_RUN=false`로 변경
+4. `npm run dev:admin`으로 실행
+
+⚠️ macOS의 Classic Bluetooth SPP(레거시 시리얼 프로필) 지원은 Windows만큼 검증되지
+않았습니다 — 최신 macOS에서 페어링해도 `/dev/cu.*` 장치가 자동으로 안 생길 가능성이
+있으니, 실제 행사 전에 반드시 한 번 미리 테스트해보세요.

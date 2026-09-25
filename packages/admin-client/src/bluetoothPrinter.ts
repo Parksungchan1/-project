@@ -1,8 +1,10 @@
 import { SerialPort } from "serialport";
 import { config } from "./config";
 
-// Pairing happens once, manually, via Windows Bluetooth settings -- this
-// just writes bytes to the COM port Windows exposes for that paired device.
+// Pairing happens once, manually, via the OS's Bluetooth settings -- this
+// just writes bytes to the serial device path the OS exposes for that paired
+// device (a COM port on Windows, /dev/cu.* on macOS). `serialport` handles
+// both the same way, so no platform-specific code is needed here.
 // Chunked with a short delay between writes because some Phomemo firmwares
 // drop bytes if you slam the whole raster through in one write().
 const CHUNK_SIZE = 4096;
