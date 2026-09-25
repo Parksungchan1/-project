@@ -186,7 +186,10 @@ export function renderResultImage(artist: Artist): Buffer {
   ctx.font = "bold 13px sans-serif";
   ctx.fillText("DATE", PADDING, y);
   ctx.font = "bold 13px sans-serif";
-  ctx.fillStyle = "#555555";
+  // Printer has no gray -- a mid-gray fill leaves even less of a small font's
+  // anti-aliased stroke above the ink threshold than black would, so secondary
+  // text prints solid black here even though it's gray on screen.
+  ctx.fillStyle = "#000000";
   ctx.fillText(todayDate(), PADDING + 40, y);
   ctx.textAlign = "right";
   ctx.fillStyle = "#000000";
@@ -199,7 +202,7 @@ export function renderResultImage(artist: Artist): Buffer {
   // Table head
   ctx.textAlign = "left";
   ctx.font = "bold 12px sans-serif";
-  ctx.fillStyle = "#555555";
+  ctx.fillStyle = "#000000";
   ctx.fillText("N.", COLS[0].x, y);
   ctx.fillText("SONG", COLS[1].x, y);
   ctx.fillText("ARTIST", COLS[2].x, y);
@@ -225,7 +228,7 @@ export function renderResultImage(artist: Artist): Buffer {
     });
 
     ctx.font = ARTIST_FONT;
-    ctx.fillStyle = "#666666";
+    ctx.fillStyle = "#000000";
     wrapText(ctx, song.artist, COLS[2].width - 4).forEach((line, li) => {
       ctx.fillText(line, COLS[2].x, textY + li * ROW_LINE_HEIGHT);
     });
@@ -243,17 +246,17 @@ export function renderResultImage(artist: Artist): Buffer {
   const totalTextY = y;
   ctx.textAlign = "left";
   ctx.font = "bold 13px sans-serif";
-  ctx.fillStyle = "#666666";
+  ctx.fillStyle = "#000000";
   ctx.fillText("키워드", COLS[0].x, totalTextY);
 
   ctx.font = TITLE_FONT;
-  ctx.fillStyle = "#666666";
+  ctx.fillStyle = "#000000";
   keywordLines.forEach((line, li) => {
     ctx.fillText(line, COLS[1].x, totalTextY + li * ROW_LINE_HEIGHT);
   });
 
   ctx.font = "bold 13px sans-serif";
-  ctx.fillStyle = "#666666";
+  ctx.fillStyle = "#000000";
   ctx.fillText("총", COLS[2].x, totalTextY);
 
   ctx.font = "bold 13px sans-serif";
