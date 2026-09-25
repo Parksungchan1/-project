@@ -12,6 +12,18 @@ function feedLines(n: number): Buffer {
   return Buffer.from([ESC, 0x64, n]);
 }
 
+// The test print ("안녕", renderTextImage) always came out solidly dark, while
+// the receipt's logo/DATE/table head -- which sit right at the top edge of the
+// image -- came out faint even after darkening their text. The difference:
+// renderTextImage's text is vertically centered in a 160px canvas, so ~56
+// blank rows print before any real ink; the receipt has almost none. That
+// points to the print head needing a few mm of travel to reach full contact
+// pressure/heat, so anything printed in the first few rows of a job comes out
+// weak regardless of how dark the source pixels are. Prepending blank rows
+// here (rather than padding every image that goes through resultImage.ts)
+// gives every job that same warm-up runway.
+const WARMUP_ROWS = 56;
+
 /**
  * Converts a PNG buffer (expected 384px wide -- the server renders result
  * strips at exactly that width, see packages/server/src/services/resultImage.ts)
@@ -28,7 +40,8 @@ export async function pngToPrinterCommand(pngBuffer: Buffer): Promise<Buffer> {
   ctx.drawImage(image, 0, 0);
   const { data } = ctx.getImageData(0, 0, width, height);
 
-  const raster = Buffer.alloc(bytesPerRow * height);
+  const totalHeight = height + WARMUP_ROWS;
+  const raster = Buffer.alloc(bytesPerRow * totalHeight); // leading WARMUP_ROWS rows left zeroed (blank)
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const i = (y * width + x) * 4;
@@ -45,7 +58,7 @@ export async function pngToPrinterCommand(pngBuffer: Buffer): Promise<Buffer> {
       // the original faithful threshold.
       const isBlack = luminance < 128;
       if (isBlack) {
-        const byteIndex = y * bytesPerRow + (x >> 3);
+        const byteIndex = (y + WARMUP_ROWS) * bytesPerRow + (x >> 3);
         const bitMask = 0x80 >> (x % 8);
         raster[byteIndex] |= bitMask;
       }
@@ -54,8 +67,8 @@ export async function pngToPrinterCommand(pngBuffer: Buffer): Promise<Buffer> {
 
   const xL = bytesPerRow & 0xff;
   const xH = (bytesPerRow >> 8) & 0xff;
-  const yL = height & 0xff;
-  const yH = (height >> 8) & 0xff;
+  const yL = totalHeight & 0xff;
+  const yH = (totalHeight >> 8) & 0xff;
   const rasterHeader = Buffer.from([GS, 0x76, 0x30, 0x00, xL, xH, yL, yH]);
 
   return Buffer.concat([INIT, rasterHeader, raster, feedLines(3)]);
