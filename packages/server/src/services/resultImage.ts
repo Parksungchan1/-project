@@ -126,7 +126,9 @@ export function renderResultImage(artist: Artist): Buffer {
   const measure = createCanvas(WIDTH, 10).getContext("2d");
 
   const TITLE_FONT = "bold 15px sans-serif";
-  const ARTIST_FONT = "12px sans-serif";
+  // Bolded (not just a plain small size) so small-text strokes keep enough
+  // solid core after the printer's 1-bit threshold -- see printerProtocol.ts.
+  const ARTIST_FONT = "bold 12px sans-serif";
   const ROW_LINE_HEIGHT = 17;
   const ROW_V_PADDING = 10;
 
@@ -183,7 +185,7 @@ export function renderResultImage(artist: Artist): Buffer {
   ctx.fillStyle = "#000000";
   ctx.font = "bold 13px sans-serif";
   ctx.fillText("DATE", PADDING, y);
-  ctx.font = "13px sans-serif";
+  ctx.font = "bold 13px sans-serif";
   ctx.fillStyle = "#555555";
   ctx.fillText(todayDate(), PADDING + 40, y);
   ctx.textAlign = "right";
@@ -196,7 +198,7 @@ export function renderResultImage(artist: Artist): Buffer {
 
   // Table head
   ctx.textAlign = "left";
-  ctx.font = "12px sans-serif";
+  ctx.font = "bold 12px sans-serif";
   ctx.fillStyle = "#555555";
   ctx.fillText("N.", COLS[0].x, y);
   ctx.fillText("SONG", COLS[1].x, y);
@@ -212,7 +214,7 @@ export function renderResultImage(artist: Artist): Buffer {
     const textY = rowTop + ROW_V_PADDING + ROW_LINE_HEIGHT - 5;
 
     ctx.textAlign = "left";
-    ctx.font = "13px sans-serif";
+    ctx.font = "bold 13px sans-serif";
     ctx.fillStyle = "#000000";
     ctx.fillText(String(i + 1).padStart(2, "0"), COLS[0].x, textY);
 
@@ -228,7 +230,7 @@ export function renderResultImage(artist: Artist): Buffer {
       ctx.fillText(line, COLS[2].x, textY + li * ROW_LINE_HEIGHT);
     });
 
-    ctx.font = "13px sans-serif";
+    ctx.font = "bold 13px sans-serif";
     ctx.fillStyle = "#000000";
     ctx.fillText(song.playtime, COLS[3].x, textY);
 
@@ -240,7 +242,7 @@ export function renderResultImage(artist: Artist): Buffer {
 
   const totalTextY = y;
   ctx.textAlign = "left";
-  ctx.font = "13px sans-serif";
+  ctx.font = "bold 13px sans-serif";
   ctx.fillStyle = "#666666";
   ctx.fillText("키워드", COLS[0].x, totalTextY);
 
@@ -250,7 +252,7 @@ export function renderResultImage(artist: Artist): Buffer {
     ctx.fillText(line, COLS[1].x, totalTextY + li * ROW_LINE_HEIGHT);
   });
 
-  ctx.font = "13px sans-serif";
+  ctx.font = "bold 13px sans-serif";
   ctx.fillStyle = "#666666";
   ctx.fillText("총", COLS[2].x, totalTextY);
 

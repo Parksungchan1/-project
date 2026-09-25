@@ -36,7 +36,14 @@ export async function pngToPrinterCommand(pngBuffer: Buffer): Promise<Buffer> {
       const g = data[i + 1];
       const b = data[i + 2];
       const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-      const isBlack = luminance < 128; // simple threshold; swap for dithering if quality is poor
+      // Raising this to fix faint dark-on-light text (small anti-aliased
+      // strokes losing their edge pixels) also wrecks the footer band's white
+      // text on a dark fill -- its anti-aliased edges start counting as ink
+      // too and the white letters get swallowed into solid black. One global
+      // cutoff can't serve both cases, so darkness for normal text is handled
+      // by bolding the source fonts in resultImage.ts instead; leave this at
+      // the original faithful threshold.
+      const isBlack = luminance < 128;
       if (isBlack) {
         const byteIndex = y * bytesPerRow + (x >> 3);
         const bitMask = 0x80 >> (x % 8);
