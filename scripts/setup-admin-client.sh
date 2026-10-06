@@ -10,9 +10,31 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-echo "== 1/4 Node.js 버전 확인 =="
+echo "== 1/4 Node.js 확인/설치 =="
 if ! command -v node >/dev/null 2>&1; then
-  echo "Node.js가 설치되어 있지 않습니다. https://nodejs.org 에서 18 이상 설치 후 다시 실행하세요."
+  echo "Node.js가 없습니다."
+  if [ "$(uname -s)" = "Darwin" ]; then
+    echo "macOS로 보여서 Homebrew로 자동 설치를 시도합니다."
+    if ! command -v brew >/dev/null 2>&1; then
+      echo "Homebrew도 없어서 먼저 설치합니다 -- 중간에 관리자 비밀번호를 물어볼 수 있습니다."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      # 방금 설치한 brew를 이 셸 세션 PATH에 즉시 반영 (Apple Silicon/Intel 경로 둘 다 대응)
+      if [ -x /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      elif [ -x /usr/local/bin/brew ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+      fi
+    fi
+    echo "brew install node 실행 중..."
+    brew install node
+  else
+    echo "자동 설치는 macOS만 지원합니다. https://nodejs.org 에서 18 이상 설치 후 다시 실행하세요."
+    exit 1
+  fi
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "Node.js 자동 설치에 실패했습니다. https://nodejs.org 에서 직접 설치 후 다시 실행하세요."
   exit 1
 fi
 NODE_MAJOR=$(node -v | sed 's/^v//' | cut -d. -f1)
@@ -23,7 +45,13 @@ fi
 echo "OK: $(node -v)"
 
 echo "== 2/4 의존성 설치 (npm install) =="
-npm install
+if ! npm install; then
+  echo ""
+  echo "npm install 실패 -- macOS에서는 serialport 같은 네이티브 모듈 빌드에 Xcode Command Line"
+  echo "Tools가 필요할 수 있습니다. 아래 실행 후 설치 창 뜨면 완료하고 이 스크립트를 다시 실행하세요:"
+  echo "  xcode-select --install"
+  exit 1
+fi
 
 echo "== 3/4 shared 패키지 빌드 =="
 npm run build --workspace packages/shared
