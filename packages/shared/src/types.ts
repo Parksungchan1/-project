@@ -24,6 +24,8 @@ export interface Artist {
   imageUrl: string;
   /** YouTube video id (the v= param) of the official upload of mainSong -- played in a hidden player as background audio. */
   youtubeVideoId: string;
+  /** Background playback volume 0-100, used to even out perceived loudness across different source masters. Defaults to 100 if omitted. */
+  volumePercent?: number;
   mainSong: Song;
   /** similar songs shown on the result screen and printed on the receipt */
   similarSongs: Song[];

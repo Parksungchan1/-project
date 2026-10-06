@@ -9,7 +9,8 @@
       "여성솔로"
     ],
     "imageUrl": "/media/artists/yoonmarch/photo.jpg",
-    "youtubeVideoId": "5XnKq8UykXw",
+    "youtubeVideoId": "dsKxzpcsDR0",
+    "volumePercent": 100,
     "mainSong": {
       "title": "Color It",
       "artist": "윤마치 (MRCH)",
@@ -61,6 +62,7 @@
     ],
     "imageUrl": "/media/artists/touched/photo.jpg",
     "youtubeVideoId": "qlpaukDvEr4",
+    "volumePercent": 100,
     "mainSong": {
       "title": "Alive",
       "artist": "터치드",
@@ -110,7 +112,8 @@
       "초여름"
     ],
     "imageUrl": "/media/artists/owol/photo.jpg",
-    "youtubeVideoId": "H6GIe4-JHAM",
+    "youtubeVideoId": "iWtPhKNOgcU",
+    "volumePercent": 100,
     "mainSong": {
       "title": "Lunch Time",
       "artist": "오월오일 ( 五月五日 )",
@@ -161,6 +164,7 @@
     ],
     "imageUrl": "/media/artists/atlus/photo.jpg",
     "youtubeVideoId": "j9Sn1nFGQQ8",
+    "volumePercent": 100,
     "mainSong": {
       "title": "Color Your Night",
       "artist": "ATLUS Sound Team",
@@ -211,7 +215,8 @@
       "서정적인"
     ],
     "imageUrl": "/media/artists/leedoor/photo.jpg",
-    "youtubeVideoId": "ydx6O9ZWlDU",
+    "youtubeVideoId": "E5BLkMGxDgQ",
+    "volumePercent": 100,
     "mainSong": {
       "title": "영원은 그렇듯",
       "artist": "리도어",
@@ -261,7 +266,8 @@
       "락사운드"
     ],
     "imageUrl": "/media/artists/oneokrock/photo.jpg",
-    "youtubeVideoId": "NWDAjOsTYC8",
+    "youtubeVideoId": "xGbxsiBZGPI",
+    "volumePercent": 100,
     "mainSong": {
       "title": "完全感覚Dreamer",
       "artist": "ONE OK ROCK",
@@ -312,6 +318,7 @@
     ],
     "imageUrl": "/media/artists/juhyerin/photo.jpg",
     "youtubeVideoId": "1KX9Z9TFoos",
+    "volumePercent": 100,
     "mainSong": {
       "title": "BUSY BOY",
       "artist": "주혜린",
@@ -362,6 +369,7 @@
     ],
     "imageUrl": "/media/artists/87dance/photo.jpg",
     "youtubeVideoId": "OXeLRxNqN6g",
+    "volumePercent": 100,
     "mainSong": {
       "title": "Beautiful Complex",
       "artist": "87DANCE",
@@ -412,7 +420,8 @@
       "솔로"
     ],
     "imageUrl": "/media/artists/yb/photo.jpg",
-    "youtubeVideoId": "Ht-ykmyS418",
+    "youtubeVideoId": "n9PhiPcYI3g",
+    "volumePercent": 100,
     "mainSong": {
       "title": "Rebellion (feat. Xdinary Heroes)",
       "artist": "YB",
