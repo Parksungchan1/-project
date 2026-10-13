@@ -27,9 +27,9 @@ function todayDate(): string {
 }
 
 // Column layout mirrors the on-screen receipt's CSS grid
-// (frontend/src/components/Receipt.css: grid-template-columns 17fr 36fr 28fr 19fr).
+// (frontend/src/components/Receipt.css: grid-template-columns 17fr 55fr 40fr -- no PLAYTIME column).
 const COLS = (() => {
-  const fr = [17, 36, 28, 19];
+  const fr = [17, 55, 40];
   const total = fr.reduce((a, b) => a + b, 0);
   let x = PADDING;
   return fr.map((f) => {
@@ -137,7 +137,6 @@ function drawLogo(ctx: SKRSContext2D, topY: number): void {
 /** Recreates the on-screen "영수증" receipt (Receipt.tsx) as a printable strip, so what's printed matches what the user saw. */
 export function renderResultImage(artist: Artist): Buffer {
   const songs = [artist.mainSong, ...artist.similarSongs];
-  const totalPlaytime = sumPlaytime(songs.map((s) => s.playtime));
 
   // Two-pass: measure on a scratch canvas first so we know the final height,
   // then draw for real (canvas can't be resized after creation).
@@ -224,7 +223,6 @@ export function renderResultImage(artist: Artist): Buffer {
   fillTextBold(ctx, "N.", COLS[0].x, y);
   fillTextBold(ctx, "SONG", COLS[1].x, y);
   fillTextBold(ctx, "ARTIST", COLS[2].x, y);
-  fillTextBold(ctx, "PLAYTIME", COLS[3].x, y);
   y += 10;
   strokeLine(ctx, y, "dashed");
   y += 20;
@@ -251,10 +249,6 @@ export function renderResultImage(artist: Artist): Buffer {
       fillTextBold(ctx, line, COLS[2].x, textY + li * ROW_LINE_HEIGHT);
     });
 
-    ctx.font = "bold 13px sans-serif";
-    ctx.fillStyle = "#000000";
-    fillTextBold(ctx, song.playtime, COLS[3].x, textY);
-
     y = rowTop + rowHeight;
   });
 
@@ -272,14 +266,6 @@ export function renderResultImage(artist: Artist): Buffer {
   keywordLines.forEach((line, li) => {
     fillTextBold(ctx, line, COLS[1].x, totalTextY + li * ROW_LINE_HEIGHT);
   });
-
-  ctx.font = "bold 13px sans-serif";
-  ctx.fillStyle = "#000000";
-  fillTextBold(ctx, "총", COLS[2].x, totalTextY);
-
-  ctx.font = "bold 13px sans-serif";
-  ctx.fillStyle = "#000000";
-  fillTextBold(ctx, totalPlaytime, COLS[3].x, totalTextY);
 
   y += totalRowHeight - 10;
   strokeLine(ctx, y, "solid");
@@ -307,17 +293,6 @@ function strokeLine(ctx: SKRSContext2D, y: number, style: "solid" | "dashed"): v
   ctx.lineTo(WIDTH - PADDING, y);
   ctx.stroke();
   ctx.setLineDash([]);
-}
-
-/** "mm:ss" strings -> their sum, also "mm:ss" (mirrors frontend's data/artists.ts sumPlaytime). */
-function sumPlaytime(playtimes: string[]): string {
-  const totalSeconds = playtimes.reduce((acc, p) => {
-    const [m, s] = p.split(":").map(Number);
-    return acc + m * 60 + s;
-  }, 0);
-  const m = Math.floor(totalSeconds / 60);
-  const s = totalSeconds % 60;
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
 export function renderResultImageBase64(artist: Artist): string {
